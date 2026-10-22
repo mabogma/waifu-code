@@ -28,6 +28,8 @@ async function main() {
 	if (!await exists(executable)) { throw new Error('Editor executable is missing.'); }
 	const extensionTarget = path.join(app, 'extensions/waifu-addons');
 	await fs.cp(path.join(root, 'extensions/waifu-addons'), extensionTarget, { recursive: true, filter: file => path.basename(file) !== 'test' });
+	await require('./apply-waifu-backgrounds.cjs').applyBackgrounds(app);
+	await require('./apply-waifu-branding.cjs').applyBranding(target);
 	await fs.mkdir(path.join(app, 'resources/win32'), { recursive: true });
 	await fs.copyFile(path.join(root, 'resources/win32/code.ico'), path.join(app, 'resources/win32/code.ico'));
 	await fs.copyFile(path.join(root, 'extensions/waifu-addons/media/waifu-code.png'), path.join(target, 'waifu-code.png'));

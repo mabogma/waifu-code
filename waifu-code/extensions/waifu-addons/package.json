@@ -102,6 +102,31 @@
 				"label": "Waifu Midnight",
 				"uiTheme": "vs-dark",
 				"path": "./themes/midnight.json"
+			},
+			{
+				"label": "Waifu Sakura",
+				"uiTheme": "vs",
+				"path": "./themes/sakura.json"
+			},
+			{
+				"label": "Waifu Moonlight",
+				"uiTheme": "vs-dark",
+				"path": "./themes/moonlight.json"
+			},
+			{
+				"label": "Waifu Cyber Neko",
+				"uiTheme": "vs-dark",
+				"path": "./themes/cyber-neko.json"
+			},
+			{
+				"label": "Waifu Matcha",
+				"uiTheme": "vs",
+				"path": "./themes/matcha.json"
+			},
+			{
+				"label": "Waifu Sunset",
+				"uiTheme": "vs-dark",
+				"path": "./themes/sunset.json"
 			}
 		],
 		"jsonValidation": [

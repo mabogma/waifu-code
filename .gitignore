@@ -8,6 +8,7 @@ out-vscode/
 *.tsbuildinfo
 /work/
 /outputs/
+/artifacts/
 /WaifuCode-Windows-x64/
 /VSCode-win32-x64/
 

@@ -461,7 +461,9 @@ registerAction2(class extends Action2 {
 		const instantiationService = accessor.get(IInstantiationService);
 		const picker = instantiationService.createInstance(InstalledThemesPicker, options, setTheme, getMarketplaceColorThemes);
 
-		const themes = await themeService.getColorThemes();
+		const allThemes = await themeService.getColorThemes();
+		const waifuThemes = allThemes.filter(theme => theme.extensionData?.extensionId === 'waifu.waifu-addons');
+		const themes = allThemes.filter(theme => theme.extensionData?.extensionId !== 'waifu.waifu-addons');
 		const currentTheme = themeService.getColorTheme();
 
 		const lightEntries = toEntries(themes.filter(t => t.type === ColorScheme.LIGHT), localize('themes.category.light', "light themes"));
@@ -482,7 +484,7 @@ registerAction2(class extends Action2 {
 				picks = [...lightEntries, ...darkEntries, ...hcEntries];
 				break;
 		}
-		await picker.openQuickPick(picks, currentTheme);
+		await picker.openQuickPick([...toEntries(waifuThemes, localize('themes.category.waifu', "Waifu Code")), ...picks], currentTheme);
 
 	}
 });

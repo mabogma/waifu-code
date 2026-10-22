@@ -1,0 +1,146 @@
+{
+	"name": "Waifu Sakura",
+	"type": "light",
+	"colors": {
+		"focusBorder": "#924267",
+		"foreground": "#392b3b",
+		"descriptionForeground": "#6f5d70",
+		"editor.background": "#fff7fb",
+		"editor.foreground": "#392b3b",
+		"editorLineNumber.foreground": "#6f5d70",
+		"editorLineNumber.activeForeground": "#924267",
+		"editorCursor.foreground": "#924267",
+		"editor.selectionBackground": "#92426735",
+		"editor.inactiveSelectionBackground": "#92426735",
+		"editor.lineHighlightBackground": "#9242670c",
+		"editorIndentGuide.background1": "#ecdbe7",
+		"editorIndentGuide.activeBackground1": "#ecdbe7",
+		"activityBar.background": "#f5e7f0",
+		"activityBar.foreground": "#392b3b",
+		"activityBar.inactiveForeground": "#924267",
+		"activityBar.activeBorder": "#924267",
+		"activityBarBadge.background": "#924267",
+		"activityBarBadge.foreground": "#fff7fb",
+		"sideBar.background": "#f5e7f0",
+		"sideBar.foreground": "#392b3b",
+		"sideBarSectionHeader.background": "#f5e7f0",
+		"sideBarTitle.foreground": "#392b3b",
+		"titleBar.activeBackground": "#f5e7f0",
+		"titleBar.activeForeground": "#924267",
+		"titleBar.inactiveBackground": "#f5e7f0",
+		"tab.activeBackground": "#fff7fb",
+		"tab.inactiveBackground": "#f5e7f0",
+		"tab.activeForeground": "#924267",
+		"tab.activeBorderTop": "#924267",
+		"tab.border": "#ecdbe7",
+		"editorGroupHeader.tabsBackground": "#f5e7f0",
+		"editorGroup.border": "#ecdbe7",
+		"statusBar.background": "#f5e7f0",
+		"statusBar.foreground": "#392b3b",
+		"statusBar.debuggingBackground": "#f5e7f0",
+		"statusBar.noFolderBackground": "#f5e7f0",
+		"panel.background": "#fff7fb",
+		"panel.border": "#ecdbe7",
+		"panelTitle.activeForeground": "#924267",
+		"terminal.background": "#fff7fb",
+		"terminal.foreground": "#392b3b",
+		"terminal.ansiMagenta": "#d3a0e8",
+		"terminal.ansiBlue": "#a6b8ef",
+		"terminal.ansiGreen": "#acd7b7",
+		"button.background": "#924267",
+		"button.foreground": "#fff7fb",
+		"button.hoverBackground": "#f5e7f0",
+		"button.secondaryBackground": "#f5e7f0",
+		"button.secondaryForeground": "#392b3b",
+		"input.background": "#f5e7f0",
+		"input.border": "#ecdbe7",
+		"input.foreground": "#392b3b",
+		"list.activeSelectionBackground": "#92426735",
+		"list.activeSelectionForeground": "#392b3b",
+		"list.hoverBackground": "#f5e7f0",
+		"badge.background": "#f5e7f0",
+		"badge.foreground": "#392b3b",
+		"progressBar.background": "#924267",
+		"textLink.foreground": "#924267",
+		"notificationCenterHeader.background": "#f5e7f0",
+		"notifications.background": "#f5e7f0",
+		"notifications.border": "#ecdbe7",
+		"welcomePage.background": "#fff7fb",
+		"widget.border": "#ecdbe7",
+		"scrollbarSlider.background": "#92426745"
+	},
+	"tokenColors": [
+		{
+			"scope": [
+				"comment",
+				"punctuation.definition.comment"
+			],
+			"settings": {
+				"foreground": "#746177",
+				"fontStyle": "italic"
+			}
+		},
+		{
+			"scope": [
+				"keyword",
+				"storage.type",
+				"storage.modifier"
+			],
+			"settings": {
+				"foreground": "#9b326b"
+			}
+		},
+		{
+			"scope": [
+				"string",
+				"string.quoted"
+			],
+			"settings": {
+				"foreground": "#326c4b"
+			}
+		},
+		{
+			"scope": [
+				"constant.numeric",
+				"constant.language"
+			],
+			"settings": {
+				"foreground": "#995522"
+			}
+		},
+		{
+			"scope": [
+				"entity.name.function",
+				"support.function"
+			],
+			"settings": {
+				"foreground": "#5544a0"
+			}
+		},
+		{
+			"scope": [
+				"entity.name.type",
+				"support.type"
+			],
+			"settings": {
+				"foreground": "#8a5823"
+			}
+		},
+		{
+			"scope": [
+				"variable.parameter"
+			],
+			"settings": {
+				"foreground": "#5e4a72"
+			}
+		},
+		{
+			"scope": [
+				"entity.name.tag"
+			],
+			"settings": {
+				"foreground": "#a53668"
+			}
+		}
+	]
+}

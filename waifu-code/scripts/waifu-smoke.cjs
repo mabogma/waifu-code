@@ -11,7 +11,7 @@ async function main() {
 	const runtime = process.argv[2] ? path.resolve(process.argv[2]) : undefined;
 	const executable = runtime ? path.join(runtime, 'Waifu Code.exe') : path.join(root, '.build/electron', product.nameShort + '.exe');
 	await fs.access(executable);
-	const scratch = path.resolve(root, '../../work');
+	const scratch = path.resolve(root, '../work');
 	await fs.mkdir(scratch, { recursive: true });
 	const profile = await fs.mkdtemp(path.join(scratch, 'waifu-smoke-'));
 	const userData = path.join(profile, 'user-data');
@@ -20,7 +20,8 @@ async function main() {
 	await fs.writeFile(path.join(harness, 'package.json'), JSON.stringify({ name: 'waifu-test-harness', publisher: 'waifu-test', version: '0.0.0', engines: { vscode: '^1.100.0' } }));
 	if (runtime) {
 		await fs.mkdir(path.join(userData, 'User'), { recursive: true });
-		await fs.copyFile(path.join(runtime, 'data/user-data/User/settings.json'), path.join(userData, 'User/settings.json'));
+		try { await fs.copyFile(path.join(runtime, 'data/user-data/User/settings.json'), path.join(userData, 'User/settings.json')); }
+		catch (error) { if (error.code !== 'ENOENT') { throw error; } await fs.writeFile(path.join(userData, 'User/settings.json'), '{}'); }
 		const settingsFile = path.join(userData, 'User/settings.json');
 		const settings = JSON.parse(await fs.readFile(settingsFile, 'utf8'));
 		settings['waifuAddons.registryUrl'] = process.env.WAIFU_LIVE_REGISTRY_URL || '';

@@ -8,12 +8,20 @@ exports.run = async () => {
 	assert.ok(addonManager, 'Waifu Addons is bundled');
 	const api = await addonManager.activate();
 	assert.equal(addonManager.packageJSON.version, '0.4.1');
+	assert.equal(vscode.workspace.getConfiguration('workbench').inspect('colorTheme').defaultValue, 'Waifu Midnight');
 	assert.equal(addonManager.packageJSON.contributes.views.waifu[0].type, 'webview');
 	const commands = await vscode.commands.getCommands(true);
 	for (const command of ['waifu.addons.install', 'waifu.addons.manage', 'waifu.welcome', 'waifu.uppercase.selection']) {
 		assert.ok(commands.includes(command), `Missing ${command}`);
 	}
 	assert.ok(addonManager.packageJSON.contributes.themes.some(theme => theme.label === 'Waifu Midnight'));
+	for (const label of ['Waifu Sakura', 'Waifu Moonlight', 'Waifu Cyber Neko', 'Waifu Matcha', 'Waifu Sunset']) {
+		assert.ok(addonManager.packageJSON.contributes.themes.some(theme => theme.label === label), `Missing theme ${label}`);
+		await vscode.workspace.getConfiguration('workbench').update('colorTheme', label, vscode.ConfigurationTarget.Global);
+		await new Promise(resolve => setTimeout(resolve, 150));
+		assert.equal(vscode.window.activeColorTheme.kind, ['Waifu Sakura', 'Waifu Matcha'].includes(label) ? vscode.ColorThemeKind.Light : vscode.ColorThemeKind.Dark);
+	}
+	await vscode.workspace.getConfiguration('workbench').update('colorTheme', 'Waifu Midnight', vscode.ConfigurationTarget.Global);
 	await vscode.commands.executeCommand('waifu.welcome');
 	assert.equal(vscode.window.tabGroups.activeTabGroup.activeTab.label, 'Waifu Code');
 	const document = await vscode.workspace.openTextDocument({ content: 'waifu code' });

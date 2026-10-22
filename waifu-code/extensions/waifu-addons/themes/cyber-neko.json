@@ -1,0 +1,146 @@
+{
+	"name": "Waifu Cyber Neko",
+	"type": "dark",
+	"colors": {
+		"focusBorder": "#f5a4df",
+		"foreground": "#f2e5ff",
+		"descriptionForeground": "#bca7d0",
+		"editor.background": "#171326",
+		"editor.foreground": "#f2e5ff",
+		"editorLineNumber.foreground": "#bca7d0",
+		"editorLineNumber.activeForeground": "#f5a4df",
+		"editorCursor.foreground": "#f5a4df",
+		"editor.selectionBackground": "#f5a4df35",
+		"editor.inactiveSelectionBackground": "#f5a4df35",
+		"editor.lineHighlightBackground": "#f5a4df0c",
+		"editorIndentGuide.background1": "#382347",
+		"editorIndentGuide.activeBackground1": "#382347",
+		"activityBar.background": "#100d1d",
+		"activityBar.foreground": "#f2e5ff",
+		"activityBar.inactiveForeground": "#f5a4df",
+		"activityBar.activeBorder": "#f5a4df",
+		"activityBarBadge.background": "#f5a4df",
+		"activityBarBadge.foreground": "#171326",
+		"sideBar.background": "#100d1d",
+		"sideBar.foreground": "#f2e5ff",
+		"sideBarSectionHeader.background": "#100d1d",
+		"sideBarTitle.foreground": "#f2e5ff",
+		"titleBar.activeBackground": "#100d1d",
+		"titleBar.activeForeground": "#f5a4df",
+		"titleBar.inactiveBackground": "#100d1d",
+		"tab.activeBackground": "#171326",
+		"tab.inactiveBackground": "#100d1d",
+		"tab.activeForeground": "#f5a4df",
+		"tab.activeBorderTop": "#f5a4df",
+		"tab.border": "#382347",
+		"editorGroupHeader.tabsBackground": "#100d1d",
+		"editorGroup.border": "#382347",
+		"statusBar.background": "#100d1d",
+		"statusBar.foreground": "#f2e5ff",
+		"statusBar.debuggingBackground": "#100d1d",
+		"statusBar.noFolderBackground": "#100d1d",
+		"panel.background": "#171326",
+		"panel.border": "#382347",
+		"panelTitle.activeForeground": "#f5a4df",
+		"terminal.background": "#171326",
+		"terminal.foreground": "#f2e5ff",
+		"terminal.ansiMagenta": "#d3a0e8",
+		"terminal.ansiBlue": "#a6b8ef",
+		"terminal.ansiGreen": "#acd7b7",
+		"button.background": "#f5a4df",
+		"button.foreground": "#171326",
+		"button.hoverBackground": "#100d1d",
+		"button.secondaryBackground": "#100d1d",
+		"button.secondaryForeground": "#f2e5ff",
+		"input.background": "#100d1d",
+		"input.border": "#382347",
+		"input.foreground": "#f2e5ff",
+		"list.activeSelectionBackground": "#f5a4df35",
+		"list.activeSelectionForeground": "#f2e5ff",
+		"list.hoverBackground": "#100d1d",
+		"badge.background": "#100d1d",
+		"badge.foreground": "#f2e5ff",
+		"progressBar.background": "#f5a4df",
+		"textLink.foreground": "#f5a4df",
+		"notificationCenterHeader.background": "#100d1d",
+		"notifications.background": "#100d1d",
+		"notifications.border": "#382347",
+		"welcomePage.background": "#171326",
+		"widget.border": "#382347",
+		"scrollbarSlider.background": "#f5a4df45"
+	},
+	"tokenColors": [
+		{
+			"scope": [
+				"comment",
+				"punctuation.definition.comment"
+			],
+			"settings": {
+				"foreground": "#aa96bd",
+				"fontStyle": "italic"
+			}
+		},
+		{
+			"scope": [
+				"keyword",
+				"storage.type",
+				"storage.modifier"
+			],
+			"settings": {
+				"foreground": "#ff9de4"
+			}
+		},
+		{
+			"scope": [
+				"string",
+				"string.quoted"
+			],
+			"settings": {
+				"foreground": "#a9e9cf"
+			}
+		},
+		{
+			"scope": [
+				"constant.numeric",
+				"constant.language"
+			],
+			"settings": {
+				"foreground": "#f8c18b"
+			}
+		},
+		{
+			"scope": [
+				"entity.name.function",
+				"support.function"
+			],
+			"settings": {
+				"foreground": "#8fdff4"
+			}
+		},
+		{
+			"scope": [
+				"entity.name.type",
+				"support.type"
+			],
+			"settings": {
+				"foreground": "#e7ccff"
+			}
+		},
+		{
+			"scope": [
+				"variable.parameter"
+			],
+			"settings": {
+				"foreground": "#d0b9ff"
+			}
+		},
+		{
+			"scope": [
+				"entity.name.tag"
+			],
+			"settings": {
+				"foreground": "#f5a4df"
+			}
+		}
+	]
+}

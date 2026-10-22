@@ -1,0 +1,146 @@
+{
+	"name": "Waifu Sunset",
+	"type": "dark",
+	"colors": {
+		"focusBorder": "#f3b38d",
+		"foreground": "#ffe7dc",
+		"descriptionForeground": "#c7a4a5",
+		"editor.background": "#2b1c29",
+		"editor.foreground": "#ffe7dc",
+		"editorLineNumber.foreground": "#c7a4a5",
+		"editorLineNumber.activeForeground": "#f3b38d",
+		"editorCursor.foreground": "#f3b38d",
+		"editor.selectionBackground": "#f3b38d35",
+		"editor.inactiveSelectionBackground": "#f3b38d35",
+		"editor.lineHighlightBackground": "#f3b38d0c",
+		"editorIndentGuide.background1": "#513341",
+		"editorIndentGuide.activeBackground1": "#513341",
+		"activityBar.background": "#211521",
+		"activityBar.foreground": "#ffe7dc",
+		"activityBar.inactiveForeground": "#f3b38d",
+		"activityBar.activeBorder": "#f3b38d",
+		"activityBarBadge.background": "#f3b38d",
+		"activityBarBadge.foreground": "#2b1c29",
+		"sideBar.background": "#211521",
+		"sideBar.foreground": "#ffe7dc",
+		"sideBarSectionHeader.background": "#211521",
+		"sideBarTitle.foreground": "#ffe7dc",
+		"titleBar.activeBackground": "#211521",
+		"titleBar.activeForeground": "#f3b38d",
+		"titleBar.inactiveBackground": "#211521",
+		"tab.activeBackground": "#2b1c29",
+		"tab.inactiveBackground": "#211521",
+		"tab.activeForeground": "#f3b38d",
+		"tab.activeBorderTop": "#f3b38d",
+		"tab.border": "#513341",
+		"editorGroupHeader.tabsBackground": "#211521",
+		"editorGroup.border": "#513341",
+		"statusBar.background": "#211521",
+		"statusBar.foreground": "#ffe7dc",
+		"statusBar.debuggingBackground": "#211521",
+		"statusBar.noFolderBackground": "#211521",
+		"panel.background": "#2b1c29",
+		"panel.border": "#513341",
+		"panelTitle.activeForeground": "#f3b38d",
+		"terminal.background": "#2b1c29",
+		"terminal.foreground": "#ffe7dc",
+		"terminal.ansiMagenta": "#d3a0e8",
+		"terminal.ansiBlue": "#a6b8ef",
+		"terminal.ansiGreen": "#acd7b7",
+		"button.background": "#f3b38d",
+		"button.foreground": "#2b1c29",
+		"button.hoverBackground": "#211521",
+		"button.secondaryBackground": "#211521",
+		"button.secondaryForeground": "#ffe7dc",
+		"input.background": "#211521",
+		"input.border": "#513341",
+		"input.foreground": "#ffe7dc",
+		"list.activeSelectionBackground": "#f3b38d35",
+		"list.activeSelectionForeground": "#ffe7dc",
+		"list.hoverBackground": "#211521",
+		"badge.background": "#211521",
+		"badge.foreground": "#ffe7dc",
+		"progressBar.background": "#f3b38d",
+		"textLink.foreground": "#f3b38d",
+		"notificationCenterHeader.background": "#211521",
+		"notifications.background": "#211521",
+		"notifications.border": "#513341",
+		"welcomePage.background": "#2b1c29",
+		"widget.border": "#513341",
+		"scrollbarSlider.background": "#f3b38d45"
+	},
+	"tokenColors": [
+		{
+			"scope": [
+				"comment",
+				"punctuation.definition.comment"
+			],
+			"settings": {
+				"foreground": "#c3a1a5",
+				"fontStyle": "italic"
+			}
+		},
+		{
+			"scope": [
+				"keyword",
+				"storage.type",
+				"storage.modifier"
+			],
+			"settings": {
+				"foreground": "#f8b3d8"
+			}
+		},
+		{
+			"scope": [
+				"string",
+				"string.quoted"
+			],
+			"settings": {
+				"foreground": "#b8ddad"
+			}
+		},
+		{
+			"scope": [
+				"constant.numeric",
+				"constant.language"
+			],
+			"settings": {
+				"foreground": "#ffd09c"
+			}
+		},
+		{
+			"scope": [
+				"entity.name.function",
+				"support.function"
+			],
+			"settings": {
+				"foreground": "#c9bcff"
+			}
+		},
+		{
+			"scope": [
+				"entity.name.type",
+				"support.type"
+			],
+			"settings": {
+				"foreground": "#efd78f"
+			}
+		},
+		{
+			"scope": [
+				"variable.parameter"
+			],
+			"settings": {
+				"foreground": "#eec4df"
+			}
+		},
+		{
+			"scope": [
+				"entity.name.tag"
+			],
+			"settings": {
+				"foreground": "#f5ac99"
+			}
+		}
+	]
+}
