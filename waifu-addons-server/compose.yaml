@@ -1,0 +1,44 @@
+name: waifu-addons
+services:
+  registry:
+    build: .
+    image: waifu-addons-server:local
+    restart: unless-stopped
+    init: true
+    environment:
+      HOST: 0.0.0.0
+      PORT: "4853"
+      WAIFU_DATA_DIR: /data
+    volumes:
+      - registry-data:/data
+    expose:
+      - "4853"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+  nginx:
+    image: nginx:stable-alpine
+    restart: unless-stopped
+    depends_on:
+      registry:
+        condition: service_healthy
+    ports:
+      - "4853:4853"
+    volumes:
+      - ./deploy/nginx/waifu-addons.conf:/etc/nginx/conf.d/default.conf:ro
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+volumes:
+  registry-data:

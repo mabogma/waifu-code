@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Waifu Addon",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "version",
+    "apiVersion",
+    "main",
+    "commands"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{1,63}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "apiVersion": {
+      "const": 1
+    },
+    "main": {
+      "type": "string",
+      "pattern": "\\.cjs$"
+    },
+    "commands": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^waifu\\.[a-z][a-z0-9-]+\\.[a-zA-Z0-9.-]+$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "permissions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "editor.read",
+          "editor.write",
+          "ui.panels",
+          "files.read",
+          "files.write",
+          "tasks.background",
+          "storage.settings",
+          "storage.secrets"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+	"id": "hello-waifu",
+	"name": "Hello, Waifu!",
+	"version": "1.0.0",
+	"apiVersion": 1,
+	"main": "main.cjs",
+	"commands": [{ "id": "waifu.hello-waifu.greet", "title": "Say Hello ♡" }]
+}

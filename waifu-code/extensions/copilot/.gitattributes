@@ -1,0 +1,4 @@
+* text=auto eol=lf
+
+# This source snapshot stores upstream SQLite fixtures as regular Git blobs.
+*.sqlite -filter -diff -merge -text

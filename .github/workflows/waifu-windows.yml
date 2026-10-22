@@ -1,0 +1,26 @@
+name: Waifu Code Windows
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+defaults:
+  run:
+    working-directory: waifu-code
+jobs:
+  build:
+    runs-on: windows-2025
+    env:
+      NODE_OPTIONS: --max-old-space-size=8192
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: waifu-code/.nvmrc
+      - run: npm run install-fast
+      - run: npm run waifu:test
+      - run: npm run gulp vscode-win32-x64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Waifu-Code-Windows-x64
+          path: VSCode-win32-x64/**
+          if-no-files-found: error

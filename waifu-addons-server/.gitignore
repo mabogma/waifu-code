@@ -1,0 +1,10 @@
+dist/
+site.tar.gz
+node_modules/
+.env*
+!.env.example
+.private/
+data/
+*.log
+certs/
+waifu-addons-backup/

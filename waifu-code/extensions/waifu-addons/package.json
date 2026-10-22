@@ -1,0 +1,126 @@
+{
+	"name": "waifu-addons",
+	"displayName": "%displayName%",
+	"description": "%description%",
+	"publisher": "waifu",
+	"version": "0.4.1",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.100.0"
+	},
+	"main": "./extension.cjs",
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"capabilities": {
+		"untrustedWorkspaces": {
+			"supported": "limited",
+			"description": "Addon execution and installation require a trusted workspace."
+		}
+	},
+	"contributes": {
+		"commands": [
+			{
+				"command": "waifu.addons.install",
+				"title": "%waifu.addons.install.title%",
+				"icon": "$(add)"
+			},
+			{
+				"command": "waifu.addons.manage",
+				"title": "%waifu.addons.manage.title%"
+			},
+			{
+				"command": "waifu.welcome",
+				"title": "%waifu.welcome.title%"
+			},
+			{
+				"command": "waifu.addons.refresh",
+				"title": "%waifu.addons.refresh.title%",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "waifu.addons.details",
+				"title": "%waifu.addons.details.title%"
+			},
+			{
+				"command": "waifu.addons.website",
+				"title": "%waifu.addons.website.title%"
+			},
+			{
+				"command": "waifu.addons.publish",
+				"title": "%waifu.addons.publish.title%"
+			},
+			{
+				"command": "waifu.addons.installPackage",
+				"title": "%waifu.addons.installPackage.title%"
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "waifu",
+					"title": "Waifu Addons",
+					"icon": "media/heart.svg"
+				}
+			]
+		},
+		"views": {
+			"waifu": [
+				{
+					"id": "waifu.addons",
+					"name": "Waifu Addons",
+					"type": "webview"
+				}
+			]
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "waifu.addons.install",
+					"when": "view == waifu.addons",
+					"group": "navigation"
+				},
+				{
+					"command": "waifu.addons.refresh",
+					"when": "view == waifu.addons",
+					"group": "navigation"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "waifu.addons.details",
+					"when": "false"
+				}
+			]
+		},
+		"configurationDefaults": {
+			"workbench.colorTheme": "Waifu Midnight",
+			"workbench.startupEditor": "none"
+		},
+		"themes": [
+			{
+				"label": "Waifu Midnight",
+				"uiTheme": "vs-dark",
+				"path": "./themes/midnight.json"
+			}
+		],
+		"jsonValidation": [
+			{
+				"fileMatch": "waifu-addon.json",
+				"url": "./addon.schema.json"
+			}
+		],
+		"configuration": {
+			"title": "Waifu Addons",
+			"properties": {
+				"waifuAddons.registryUrl": {
+					"type": "string",
+					"default": "http://132.243.115.51:4853",
+					"scope": "application",
+					"description": "Waifu Addons registry URL. HTTPS is required except on localhost or the owner server http://132.243.115.51:4853. Leave empty to use only bundled addons."
+				}
+			}
+		}
+	},
+	"icon": "media/waifu-code.png"
+}

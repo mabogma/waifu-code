@@ -1,0 +1,14 @@
+**
+!Dockerfile
+!package.json
+!server.mjs
+!auth.mjs
+!cli.mjs
+!shared/
+!shared/**
+!public/
+!public/**
+!docs/
+!docs/**
+!examples/
+!examples/**

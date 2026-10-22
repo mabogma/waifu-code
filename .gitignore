@@ -1,0 +1,27 @@
+# Dependencies and generated output
+node_modules/
+dist/
+.build/
+out/
+out-build/
+out-vscode/
+*.tsbuildinfo
+/work/
+/outputs/
+/WaifuCode-Windows-x64/
+/VSCode-win32-x64/
+
+# Local identities, secrets and runtime state
+.private/
+.openai/hosting.json
+.env
+.env.*
+!.env.example
+certs/
+*-token.txt
+waifu-addons-server/data/
+waifu-addons-server/waifu-addons-backup/
+waifu-addons-server/site.tar.gz
+*.log
+.DS_Store
+Thumbs.db

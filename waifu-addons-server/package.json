@@ -1,0 +1,5 @@
+{
+  "name": "waifu-addons-registry", "version": "1.0.0", "private": true, "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": { "start": "node server.mjs", "build": "node scripts/build.mjs", "test": "node --test test/*.test.mjs", "publisher": "node cli.mjs publisher", "pack": "node cli.mjs pack" }
+}

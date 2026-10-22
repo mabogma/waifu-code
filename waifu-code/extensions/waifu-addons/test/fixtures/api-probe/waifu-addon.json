@@ -1,0 +1,1 @@
+{"id":"api-probe","name":"Waifu API Probe","version":"1.0.0","apiVersion":1,"main":"main.cjs","permissions":["ui.panels","tasks.background","storage.settings","storage.secrets"],"commands":[{"id":"waifu.api-probe.run","title":"API Probe"}]}

@@ -1,0 +1,30 @@
+# Alternative to compose.yaml: nginx is installed on the Linux host.
+name: waifu-addons-host
+services:
+  registry:
+    build: .
+    image: waifu-addons-server:local
+    restart: unless-stopped
+    init: true
+    environment:
+      HOST: 0.0.0.0
+      PORT: "4853"
+      WAIFU_DATA_DIR: /data
+    ports:
+      - "127.0.0.1:4854:4853"
+    volumes:
+      - registry-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+volumes:
+  registry-data:

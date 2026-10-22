@@ -1,0 +1,26 @@
+name: Waifu project checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  addon-and-server-tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Test addon runtime and registry
+        run: node --test waifu-code/extensions/waifu-addons/test/*.test.cjs waifu-addons-server/test/*.test.mjs
+  docker-config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Compose variants
+        working-directory: waifu-addons-server
+        run: |
+          docker compose config --quiet
+          docker compose -f compose.yaml -f compose.tls.yaml config --quiet
+          docker compose -f compose.host-nginx.yaml config --quiet

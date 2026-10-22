@@ -1,0 +1,65 @@
+/* Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root. */
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--vscode-foreground); background: var(--vscode-sideBar-background); font: var(--vscode-font-size,13px)/1.5 var(--vscode-font-family, sans-serif); }
+body[data-mode="detail"] { background: var(--vscode-editor-background); }
+button,input { font: inherit; }
+button { cursor: pointer; border: 1px solid transparent; border-radius: 2px; padding: 2px 8px; color: var(--vscode-button-foreground); background: var(--vscode-button-background); line-height: 1.5; }
+button:hover { background: var(--vscode-button-hoverBackground); }
+button:disabled { opacity: .5; cursor: default; }
+button:focus-visible,input:focus-visible,.card:focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
+.secondary { color: var(--vscode-button-secondaryForeground); background: var(--vscode-button-secondaryBackground); }
+.secondary:hover { background: var(--vscode-button-secondaryHoverBackground, var(--vscode-list-hoverBackground)); }
+.toolbar { position: sticky; top: 0; background: var(--vscode-sideBar-background); padding: 8px 12px; z-index: 1; }
+.search { width: 100%; padding: 4px 8px; color: var(--vscode-input-foreground); background: var(--vscode-input-background); border: 1px solid var(--vscode-input-border, transparent); border-radius: 2px; }
+.search::placeholder { color: var(--vscode-input-placeholderForeground); }
+.filters { display: flex; gap: 16px; margin-top: 8px; border-bottom: 1px solid var(--vscode-widget-border,transparent); }
+.filter { border: 0; border-bottom: 1px solid transparent; border-radius: 0; padding: 4px 0; background: transparent; color: var(--vscode-descriptionForeground); white-space: nowrap; }
+.filter:hover { color: var(--vscode-foreground); background: transparent; }
+.filter[aria-pressed="true"] { color: var(--vscode-foreground); border-bottom-color: var(--vscode-focusBorder); }
+.count { font-size: 11px; border-radius: 9999px; padding: 0 6px; margin-left: 4px; background: var(--vscode-badge-background); color: var(--vscode-badge-foreground); }
+.section-label { padding: 8px 12px 4px; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--vscode-sideBarSectionHeader-foreground,var(--vscode-foreground)); }
+.folder { background: transparent; color: var(--vscode-textLink-foreground); padding: 0; font-size: 11px; font-weight: 400; }
+.folder:hover { background: transparent; text-decoration: underline; }
+.card { padding: 8px 12px; display: grid; grid-template-columns: 48px minmax(0,1fr); gap: 12px; cursor: pointer; border: 1px solid transparent; }
+.card:hover { background: var(--vscode-list-hoverBackground); }
+.card[aria-current="true"] { background: var(--vscode-list-inactiveSelectionBackground,var(--vscode-list-hoverBackground)); }
+.addon-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 6px; background: var(--vscode-button-secondaryBackground); color: var(--vscode-textLink-foreground); font-size: 24px; font-weight: 600; flex: none; }
+.card-body { min-width: 0; }
+.card-title { display: flex; gap: 8px; align-items: baseline; }
+.card-title strong { flex: 1; min-width: 0; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.version { font-size: 11px; color: var(--vscode-descriptionForeground); font-weight: 400; white-space: nowrap; }
+.description { color: var(--vscode-descriptionForeground); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0; }
+.card-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 4px; }
+.publisher { min-width: 0; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card-actions { display: flex; gap: 4px; flex: none; }
+.card-actions button { font-size: 11px; padding: 0 6px; }
+.status { font-size: 11px; color: var(--vscode-descriptionForeground); margin-top: 4px; }
+.notice,.empty { margin: 12px; color: var(--vscode-descriptionForeground); }
+.notice { border-left: 2px solid var(--vscode-editorWarning-foreground); padding: 4px 8px; font-size: 12px; }
+.empty strong { display: block; color: var(--vscode-foreground); margin-bottom: 4px; font-weight: 400; }
+.detail { max-width: 960px; margin: 0 auto; padding: 32px; }
+.detail-header { display: flex; gap: 24px; align-items: flex-start; }
+.detail-header .addon-icon { width: 96px; height: 96px; font-size: 48px; border-radius: 8px; }
+.detail-heading { min-width: 0; flex: 1; }
+h1 { margin: 0 0 4px; font-size: 26px; font-weight: 600; overflow-wrap: anywhere; }
+.detail .summary { margin: 12px 0; color: var(--vscode-descriptionForeground); }
+.detail-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.detail-actions button { padding: 4px 12px; }
+.detail-tabs { display: flex; gap: 24px; border-bottom: 1px solid var(--vscode-panel-border); margin: 28px 0 20px; }
+.detail-tabs span { padding-bottom: 8px; border-bottom: 1px solid var(--vscode-focusBorder); }
+.detail-content { display: grid; grid-template-columns: minmax(0,1fr) 200px; gap: 40px; }
+h2 { margin: 0 0 12px; font-size: 18px; font-weight: 500; }
+h3 { margin: 20px 0 8px; font-size: 13px; font-weight: 600; }
+.detail p { line-height: 1.7; }
+.metadata { border-left: 1px solid var(--vscode-panel-border); padding-left: 24px; font-size: 12px; overflow-wrap: anywhere; }
+.metadata dt { color: var(--vscode-descriptionForeground); margin-top: 12px; }
+.metadata dd { margin: 2px 0 0; }
+.command-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--vscode-widget-border,transparent); }
+.permission { display: block; padding: 2px 0; color: var(--vscode-descriptionForeground); }
+.readme { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; color: var(--vscode-descriptionForeground); }
+@media(max-width:600px) { .detail { padding: 20px; } .detail-header { gap: 16px; } .detail-header .addon-icon { width: 64px; height: 64px; font-size: 32px; } .detail-content { grid-template-columns: 1fr; gap: 20px; } .metadata { border-left: 0; padding: 0; border-top: 1px solid var(--vscode-panel-border); } }
+
+
+.marketplace-tools { display:flex; flex-wrap:wrap; gap:8px 12px; margin-top:8px; }

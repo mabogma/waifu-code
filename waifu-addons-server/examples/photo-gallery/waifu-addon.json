@@ -1,0 +1,10 @@
+{
+	"id": "photo-gallery",
+	"name": "Waifu Photo Gallery",
+	"description": "Локальная фотогалерея: сетка миниатюр, фильтр, просмотр и сохранение выбранного изображения. Для Waifu Addons 0.4+.",
+	"version": "1.0.0",
+	"apiVersion": 1,
+	"main": "main.cjs",
+	"permissions": ["ui.panels", "files.read", "files.write", "tasks.background", "storage.settings"],
+	"commands": [{"id": "waifu.photo-gallery.open", "title": "Открыть фотогалерею"}]
+}

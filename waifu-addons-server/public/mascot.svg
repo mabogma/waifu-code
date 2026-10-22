@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" role="img" aria-label="Waifu Code mascot">
+<defs><linearGradient id="hair" x2=".8" y2="1"><stop stop-color="#e6d5ff"/><stop offset="1" stop-color="#9976cb"/></linearGradient><linearGradient id="coat" x2="1" y2="1"><stop stop-color="#64507d"/><stop offset="1" stop-color="#30253e"/></linearGradient></defs>
+<circle cx="200" cy="210" r="168" fill="#292035"/><circle cx="200" cy="210" r="150" fill="none" stroke="#674b79" stroke-dasharray="3 12"/>
+<path d="M75 297Q57 188 87 116 126 32 207 55 302 38 327 145L327 315 280 339 105 338Z" fill="url(#hair)"/>
+<path d="M105 174Q109 98 199 99 291 98 296 182L282 254Q265 291 201 300 138 290 119 252Z" fill="#f7dbdf"/>
+<path d="M89 173Q76 74 174 59L241 64Q312 82 307 188L269 155 257 114 237 179 214 152 198 111 168 181 142 164 109 193Z" fill="url(#hair)"/>
+<path d="M135 220Q151 200 173 218M230 218Q251 201 267 219" fill="none" stroke="#483353" stroke-width="7" stroke-linecap="round"/>
+<ellipse cx="142" cy="239" rx="19" ry="8" fill="#efacbf" opacity=".7"/><ellipse cx="260" cy="239" rx="19" ry="8" fill="#efacbf" opacity=".7"/>
+<path d="M184 251Q200 269 216 251" fill="none" stroke="#b57391" stroke-width="4" stroke-linecap="round"/>
+<path d="M183 291 181 320 220 320 217 291" fill="#f7dbdf"/>
+<path d="M107 328 175 303 201 325 226 303 292 326 323 412 76 412Z" fill="url(#coat)"/>
+<path d="M175 303 200 326 185 350 160 310M226 303 201 326 218 350 242 309" fill="#eee1f6"/>
+<path d="m201 330-34 8 8 30 26-18 27 18 7-30Z" fill="#ec9fc4"/>
+<path d="M111 105 76 69 60 123 109 131 151 147 155 93Z" fill="#efaccf"/><circle cx="110" cy="117" r="12" fill="#c67bae"/>
+<path d="m304 75 5-16 5 16 16 5-16 5-5 16-5-16-16-5Z" fill="#f2c990"/>
+<path d="M55 265C30 240 5 273 55 302 105 273 80 240 55 265" fill="#edaccd"/>
+<rect x="105" y="365" width="194" height="65" rx="12" fill="#211a2c" stroke="#8f6ba3" stroke-width="2"/>
+<path d="m169 386-13 12 13 12m62-24 13 12-13 12m-21-28-13 36" fill="none" stroke="#e9b3dc" stroke-width="4" stroke-linecap="round"/>
+</svg>

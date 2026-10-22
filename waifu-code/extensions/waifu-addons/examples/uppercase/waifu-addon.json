@@ -1,0 +1,17 @@
+{
+	"id": "uppercase",
+	"name": "Waifu Uppercase",
+	"version": "1.0.0",
+	"apiVersion": 1,
+	"main": "main.cjs",
+	"permissions": [
+		"editor.read",
+		"editor.write"
+	],
+	"commands": [
+		{
+			"id": "waifu.uppercase.selection",
+			"title": "Uppercase Selected Text"
+		}
+	]
+}

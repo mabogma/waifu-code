@@ -1,0 +1,12 @@
+{
+	"displayName": "Waifu Addons",
+	"description": "The native addon system for Waifu Code.",
+	"waifu.addons.install.title": "Waifu Addons: Install from Folder",
+	"waifu.addons.manage.title": "Waifu Addons: Manage Installed Addons",
+	"waifu.welcome.title": "Waifu Code: Welcome",
+	"waifu.addons.refresh.title": "Waifu Addons: Refresh",
+	"waifu.addons.details.title": "Waifu Addons: Open Details",
+	"waifu.addons.website.title": "Waifu Addons: Open Marketplace",
+	"waifu.addons.publish.title": "Waifu Addons: Publish Addon",
+	"waifu.addons.installPackage.title": "Waifu Addons: Install Package"
+}
