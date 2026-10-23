@@ -41,19 +41,28 @@ async function main() {
 				const label = id + (floating ? '-floating' : '-standard');
 				// This matches the workbench's grid -> editor structure. Floating panels add
 				// an opaque shell background in the shipped stylesheet: the 0.4.2 regression.
-				html = `<!doctype html><html><head><link rel="stylesheet" href="/out/vs/workbench/workbench.desktop.main.css"><style>html,body{width:100%;height:100%;margin:0}:root{${variables};--modern-ui-shell-background:${theme.colors['sideBar.background']}}.monaco-workbench{width:100vw;height:100vh}.monaco-grid-view,.part.editor,.part.editor>.content{width:100%;height:100%}p{margin:0;padding:30px;font-size:18px;color:${theme.colors['editor.foreground']}}</style></head><body><div class="monaco-workbench windows ${entry.uiTheme} modern-ui ${floating ? 'floating-panels' : ''} waifu-waifu-addons-themes-${id}-json"><div class="monaco-grid-view"><section class="part editor" style="background-color:${theme.colors['editor.background']}"><div class="content"><div class="editor-group-container"><div class="editor-instance"><p>const greeting = 'Hello, Waifu!';</p></div></div></div></section></div><div class="quick-input-widget" style="position:absolute;left:30px;top:90px;padding:10px;background-color:${theme.colors['sideBar.background']}">Readable popup</div></div></body></html>`;
+				html = `<!doctype html><html><head><link rel="stylesheet" href="/out/vs/workbench/workbench.desktop.main.css"><style>html,body{width:100%;height:100%;margin:0}:root{${variables};--vscode-surface-background:var(--vscode-sideBar-background);--vscode-surface-border:var(--vscode-widget-border);--modern-ui-floating-card-stroke-color:var(--vscode-widget-border);--modern-ui-floating-card-top-border-color:transparent;--modern-ui-floating-card-left-border-color:transparent;--vscode-strokeThickness:1px;--modern-ui-shell-background:${theme.colors['sideBar.background']}}.monaco-workbench{width:100vw;height:100vh}.monaco-grid-view,.part.editor,.part.editor>.content{width:100%;height:100%}.part.editor>.content{background-color:var(--vscode-editor-background)}p{margin:0;padding:30px;font-size:18px;color:${theme.colors['editor.foreground']}}</style></head><body><div class="monaco-workbench windows ${entry.uiTheme} modern-ui ${floating ? 'floating-panels modern-ui-compact' : ''} waifu-waifu-addons-themes-${id}-json"><div class="monaco-grid-view"><aside class="part sidebar" style="position:absolute;left:0;top:0;width:240px;height:100%;background-color:var(--vscode-sideBar-background)"><div class="title" style="height:40px">Explorer</div><div class="monaco-pane-view" style="height:calc(100% - 40px)"><div class="pane" style="height:100%"><div class="pane-header" style="height:32px">Project</div><div class="pane-body" style="height:calc(100% - 32px)">Files</div></div></div></aside><section class="part editor" style="position:absolute;left:240px;top:0;width:calc(100% - 240px);height:100%;background-color:${theme.colors['editor.background']}"><div class="content"><div class="editor-group-container"><div class="editor-instance"><p>const greeting = 'Hello, Waifu!';</p></div></div></div></section></div><div class="quick-input-widget" style="position:absolute;left:30px;top:90px;padding:10px;background-color:${theme.colors['sideBar.background']}">Readable popup</div></div></body></html>`;
 				requests.length = 0;
 				await page.goto('http://127.0.0.1:' + server.address().port, { waitUntil: 'networkidle' });
 				assert.ok(requests.some(url => url.endsWith('/backgrounds/' + id + '.png')), label + ': image must load');
 				const withImage = await page.screenshot({ path: path.join(output, label + '.png'), animations: 'disabled' });
-				const colors = await page.evaluate(() => ({ grid: getComputedStyle(document.querySelector('.monaco-grid-view')).backgroundColor, popup: getComputedStyle(document.querySelector('.quick-input-widget')).backgroundColor }));
+				const colors = await page.evaluate(() => Object.fromEntries(Object.entries({ grid: '.monaco-grid-view', popup: '.quick-input-widget', editorContent: '.part.editor>.content', sidebar: '.part.sidebar', pane: '.part.sidebar .pane', paneHeader: '.part.sidebar .pane-header' }).map(([key, selector]) => [key, getComputedStyle(document.querySelector(selector)).backgroundColor])));
 				assert.equal(colors.grid, 'rgba(0, 0, 0, 0)', label + ': grid must expose wallpaper');
 				assert.notEqual(colors.popup, 'rgba(0, 0, 0, 0)', label + ': popup must remain readable');
+				for (const surface of ['editorContent', 'sidebar', 'pane', 'paneHeader']) { assert.equal(colors[surface], 'rgba(0, 0, 0, 0)', label + ': ' + surface + ' must expose wallpaper'); }
+				const sidebarWithImage = await page.screenshot({ clip: { x: 25, y: 200, width: 190, height: 450 }, animations: 'disabled' });
+				const editorWithImage = await page.screenshot({ clip: { x: 300, y: 100, width: 800, height: 600 }, animations: 'disabled' });
 				// Inline !important is intentional: a weaker stylesheet selector would lose
 				// to the theme rule and make this pixel comparison a false positive.
-				await page.evaluate(() => document.querySelector('.monaco-workbench').style.setProperty('background-image', 'none', 'important'));
+				await page.evaluate(() => {
+					const root = document.querySelector('.monaco-workbench');
+					const gradient = getComputedStyle(root).backgroundImage.replace(/,\s*url\(.*/, '');
+					root.style.setProperty('background-image', gradient, 'important');
+				});
 				const withoutImage = await page.screenshot({ animations: 'disabled' });
 				assert.ok(!withImage.equals(withoutImage), label + ': wallpaper must contribute visible pixels');
+				assert.ok(!sidebarWithImage.equals(await page.screenshot({ clip: { x: 25, y: 200, width: 190, height: 450 }, animations: 'disabled' })), label + ': wallpaper must be visible beneath sidebar content');
+				assert.ok(!editorWithImage.equals(await page.screenshot({ clip: { x: 300, y: 100, width: 800, height: 600 }, animations: 'disabled' })), label + ': wallpaper must be visible beneath editor content');
 				results.push({ theme: entry.label, floating, visible: true });
 			}
 		}
