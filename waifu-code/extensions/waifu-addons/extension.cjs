@@ -12,6 +12,7 @@ let activeStop;
 
 async function activate(context) {
 	const storage = path.join(context.globalStorageUri.fsPath, 'addons');
+	require('./updater.cjs').registerUpdater(vscode, context);
 	await fs.rm(path.join(context.globalStorageUri.fsPath, 'panel-images'), { recursive: true, force: true });
 	const output = vscode.window.createOutputChannel('Waifu Addons');
 	context.subscriptions.push(output);
@@ -209,7 +210,7 @@ async function activate(context) {
 		const panel = vscode.window.createWebviewPanel('waifu.welcome', 'Waifu Code', vscode.ViewColumn.One, { enableScripts: false, localResourceRoots: [vscode.Uri.joinPath(context.extensionUri, 'media')] });
 		context.subscriptions.push(panel);
 		const mascot = panel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, 'media', 'mascot.svg'));
-		panel.webview.html = `<!doctype html><html><head><meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${panel.webview.cspSource}; style-src 'unsafe-inline'"><style>
+		panel.webview.html = `<!doctype html><html><head><meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${panel.webview.cspSource}; style-src ${panel.webview.cspSource} 'unsafe-inline'"><link rel="stylesheet" href="${panel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, 'media', 'webview-backgrounds.css'))}"><style>
 		body{margin:0;background:var(--vscode-editor-background);color:var(--vscode-editor-foreground);font-family:var(--vscode-font-family)}main{max-width:960px;margin:8vh auto;padding:32px;display:flex;align-items:center;gap:40px}section{flex:1}.eyebrow{color:#f4a7c5;font-size:12px;letter-spacing:.2em}h1{font-size:48px;letter-spacing:-.04em;margin:16px 0}p{color:var(--vscode-descriptionForeground);font-size:16px;line-height:1.8}img{width:36%;max-width:320px}.pill{display:inline-block;border:1px solid #594263;border-radius:9999px;padding:8px 16px;color:#edb4df}kbd{border:1px solid #594263;border-radius:4px;padding:2px 6px}.hint{font-size:13px}footer{border-top:1px solid #342d43;padding-top:24px;margin-top:32px}@media(max-width:650px){main{flex-direction:column-reverse}img{width:50%}h1{font-size:36px}}</style></head><body><main><section><div class="eyebrow">YOUR LITTLE CODING UNIVERSE</div><h1>Waifu Code <span style="color:#f4a7c5">♡</span></h1><p>A quiet place for big ideas.<br>Your editor. Your aesthetic. Your addons.</p><span class="pill">Waifu Midnight · Code OSS</span><footer><p class="hint">Open a folder to begin. Find <b>Waifu Addons</b> in the heart sidebar to install your own addons.</p><p class="hint">Command palette: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd><br>Search for <b>Waifu Addons: Manage Installed Addons</b>.</p></footer></section><img src="${mascot}" alt="Waifu Code mascot with lilac hair and a pink bow"></main></body></html>`;
 	}));
 	await syncRegistry();

@@ -3,7 +3,7 @@
 	"displayName": "%displayName%",
 	"description": "%description%",
 	"publisher": "waifu",
-	"version": "0.4.1",
+	"version": "0.4.2",
 	"license": "MIT",
 	"engines": {
 		"vscode": "^1.100.0"
@@ -53,6 +53,10 @@
 			{
 				"command": "waifu.addons.installPackage",
 				"title": "%waifu.addons.installPackage.title%"
+			},
+			{
+				"command": "waifu.updates.check",
+				"title": "Waifu Code: Check for Updates"
 			}
 		],
 		"viewsContainers": {
@@ -143,6 +147,12 @@
 					"default": "http://132.243.115.51:4853",
 					"scope": "application",
 					"description": "Waifu Addons registry URL. HTTPS is required except on localhost or the owner server http://132.243.115.51:4853. Leave empty to use only bundled addons."
+				},
+				"waifuUpdates.enabled": {
+					"type": "boolean",
+					"default": true,
+					"scope": "application",
+					"description": "Automatically check and download stable Waifu Code updates from GitHub Releases. Restart requires confirmation."
 				}
 			}
 		}

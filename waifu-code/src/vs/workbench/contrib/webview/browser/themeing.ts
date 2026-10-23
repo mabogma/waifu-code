@@ -91,6 +91,13 @@ export class WebviewThemeDataProvider extends Disposable {
 				'vscode-editor-font-feature-settings': editorFontLigatures,
 			};
 
+			if (theme.settingsId.startsWith('Waifu ')) {
+				Object.assign(styles, {
+					'vscode-editor-background': 'transparent',
+					'vscode-sideBar-background': 'transparent',
+					'vscode-panel-background': 'transparent'
+				});
+			}
 			const activeTheme = ApiThemeClassName.fromTheme(theme);
 			this._cachedWebViewThemeData = { styles, activeTheme, themeLabel: theme.label, themeId: theme.settingsId };
 		}

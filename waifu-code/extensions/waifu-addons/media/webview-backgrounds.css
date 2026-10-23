@@ -1,0 +1,7 @@
+/* Local wallpapers for owned Waifu webviews; follows theme changes without scripts. */
+body[data-vscode-theme-id="Waifu Midnight"]{min-height:100vh;background:linear-gradient(90deg,rgba(25,21,34,.95),rgba(25,21,34,.81)),url('./backgrounds/midnight.png') center right/cover fixed no-repeat!important;}
+body[data-vscode-theme-id="Waifu Sakura"]{min-height:100vh;background:linear-gradient(90deg,rgba(255,247,251,.95),rgba(255,247,251,.81)),url('./backgrounds/sakura.png') center right/cover fixed no-repeat!important;}
+body[data-vscode-theme-id="Waifu Moonlight"]{min-height:100vh;background:linear-gradient(90deg,rgba(16,27,48,.95),rgba(16,27,48,.81)),url('./backgrounds/moonlight.png') center right/cover fixed no-repeat!important;}
+body[data-vscode-theme-id="Waifu Cyber Neko"]{min-height:100vh;background:linear-gradient(90deg,rgba(23,19,38,.95),rgba(23,19,38,.81)),url('./backgrounds/cyber-neko.png') center right/cover fixed no-repeat!important;}
+body[data-vscode-theme-id="Waifu Matcha"]{min-height:100vh;background:linear-gradient(90deg,rgba(245,248,236,.95),rgba(245,248,236,.81)),url('./backgrounds/matcha.png') center right/cover fixed no-repeat!important;}
+body[data-vscode-theme-id="Waifu Sunset"]{min-height:100vh;background:linear-gradient(90deg,rgba(43,28,41,.95),rgba(43,28,41,.81)),url('./backgrounds/sunset.png') center right/cover fixed no-repeat!important;}

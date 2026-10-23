@@ -12,10 +12,30 @@ async function applyBackgrounds(app) {
 	const wallpaperCss = await fs.readFile(path.join(app, 'extensions/waifu-addons/media/backgrounds.css'), 'utf8');
 	const content = original + '\n' + marker + '\n' + wallpaperCss;
 	await fs.writeFile(file, content);
+	const jsRelative = 'vs/workbench/workbench.desktop.main.js';
+	const jsFile = path.join(app, 'out', jsRelative);
+	let js = await fs.readFile(jsFile, 'utf8');
+	if (!js.includes('/* WAIFU WEBVIEW BACKGROUNDS */')) {
+		const pattern = /this\._cachedWebViewThemeData=\{styles:([\w$]+),activeTheme:([\w$]+),themeLabel:([\w$]+)\.label,themeId:\3\.settingsId\}/g;
+		if ([...js.matchAll(pattern)].length !== 1) { throw new Error('Unsupported webview theme provider'); }
+		js = js.replace(pattern, (_, styles, active, theme) => `this._cachedWebViewThemeData={styles:(${theme}.settingsId.startsWith("Waifu ")?Object.assign(${styles},{"vscode-editor-background":"transparent","vscode-sideBar-background":"transparent","vscode-panel-background":"transparent"}):${styles}),activeTheme:${active},themeLabel:${theme}.label,themeId:${theme}.settingsId}`) + '\n/* WAIFU WEBVIEW BACKGROUNDS */\n';
+		await fs.writeFile(jsFile, js);
+	}
+	if (!js.includes('/* WAIFU TERMINAL TRANSPARENCY */')) {
+		const initial = /allowTransparency:[\w$]+\.enableImages/g;
+		const update = /\.raw\.options\.allowTransparency=[\w$]+\.enableImages/g;
+		if ([...js.matchAll(initial)].length !== 1 || [...js.matchAll(update)].length !== 1) { throw new Error('Unsupported terminal renderer base'); }
+		js = js.replace(initial, 'allowTransparency:!0').replace(update, '.raw.options.allowTransparency=!0') + '\n/* WAIFU TERMINAL TRANSPARENCY */\n';
+		await fs.writeFile(jsFile, js);
+	}
 	const productFile = path.join(app, 'product.json');
 	const product = JSON.parse(await fs.readFile(productFile, 'utf8'));
 	if (product.checksums && relative in product.checksums) {
 		product.checksums[relative] = crypto.createHash('sha256').update(content).digest('base64').replace(/=+$/, '');
+		await fs.writeFile(productFile, JSON.stringify(product, null, '\t') + '\n');
+	}
+	if (product.checksums && jsRelative in product.checksums) {
+		product.checksums[jsRelative] = crypto.createHash('sha256').update(js).digest('base64').replace(/=+$/, '');
 		await fs.writeFile(productFile, JSON.stringify(product, null, '\t') + '\n');
 	}
 }

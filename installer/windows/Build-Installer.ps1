@@ -1,7 +1,7 @@
 param(
 	[Parameter(Mandatory=$true)][string]$ApplicationDirectory,
 	[string]$CompilerPath = 'C:\Program Files (x86)\Inno Setup 7\ISCC.exe',
-	[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '0.4.1',
+	[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '0.4.2',
 	[string]$OutputDirectory,
 	[string]$PreparedDirectory
 )
@@ -58,7 +58,7 @@ Original licenses and third-party notices are included in resources/app.
 [IO.File]::WriteAllText((Join-Path $stage 'README-WAIFU.md'), $readme)
 [IO.File]::WriteAllText((Join-Path $stage 'BUILD-STATUS.md'), $readme)
 $manifest = Get-Content -LiteralPath (Join-Path $stage 'resources/app/extensions/waifu-addons/package.json') -Raw | ConvertFrom-Json
-if ($manifest.version -ne '0.4.1') { throw 'Unexpected addon manager version in release payload' }
+if ($manifest.version -ne $Version) { throw 'Unexpected addon manager version in release payload' }
 Write-Output 'Compiling the Windows installer...'
 & (Join-Path $PSScriptRoot 'Write-WizardArtwork.ps1') -Directory $stage
 & $CompilerPath "/DAppSourceDir=$stage" "/DInstallerOutputDir=$OutputDirectory" "/DAppVersion=$Version" (Join-Path $PSScriptRoot 'waifu-code.iss')

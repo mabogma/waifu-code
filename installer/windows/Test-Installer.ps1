@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$Installer, [string]$NodeExecutable = 'node', [string]$RegistryUrl = 'http://132.243.115.51:4853')
+param([Parameter(Mandatory=$true)][string]$Installer, [string]$NodeExecutable = 'node', [string]$RegistryUrl = 'http://132.243.115.51:4853', [string]$Version = '0.4.2', [switch]$SkipEditor)
 $ErrorActionPreference = 'Stop'
 $workspace = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 New-Item -ItemType Directory -Path (Join-Path $workspace 'work') -Force | Out-Null
@@ -14,7 +14,7 @@ $arguments = @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/NOCLOSEAPPLICATI
 $process = Start-Process -FilePath (Resolve-Path -LiteralPath $Installer).Path -ArgumentList $arguments -WindowStyle Hidden -PassThru -Wait
 if ($process.ExitCode -ne 0) { throw "Installer failed: $($process.ExitCode). See work/waifu-install.log" }
 $installed = Get-ItemProperty -LiteralPath $uninstallKey
-if ($installed.DisplayName -ne 'Waifu Code' -or $installed.DisplayVersion -ne '0.4.1') { throw 'Incorrect uninstall metadata' }
+if ($installed.DisplayName -ne 'Waifu Code' -or $installed.DisplayVersion -ne $Version) { throw 'Incorrect uninstall metadata' }
 if (-not (Test-Path -LiteralPath (Join-Path $install 'Waifu Code.exe'))) { throw 'Installed editor missing' }
 if (Test-Path -LiteralPath (Join-Path $install 'data')) { throw 'Portable data leaked into installation' }
 if (-not (Test-Path -LiteralPath $desktop)) { throw 'Desktop shortcut missing' }
@@ -28,8 +28,10 @@ Write-Output 'Install passed: app, per-user registration, shortcuts, PATH, file/
 & (Join-Path $install 'bin/waifu-code.cmd') --version
 if ($LASTEXITCODE -ne 0) { throw 'Installed CLI failed' }
 $env:WAIFU_LIVE_REGISTRY_URL=$RegistryUrl
-& $NodeExecutable (Join-Path $workspace 'waifu-code/scripts/waifu-smoke.cjs') $install
-if ($LASTEXITCODE -ne 0) { throw 'Installed editor integration test failed' }
+if (-not $SkipEditor) {
+	& $NodeExecutable (Join-Path $workspace 'waifu-code/scripts/waifu-smoke.cjs') $install
+	if ($LASTEXITCODE -ne 0) { throw 'Installed editor integration test failed' }
+}
 # Electron helpers and antivirus scanning can retain image sections briefly after
 # the main process exits. Wait for the actual installed binaries to become idle.
 $ready = $false
@@ -53,5 +55,7 @@ if ((Test-Path -LiteralPath $desktop) -or (Test-Path -LiteralPath (Join-Path $me
 if ([Environment]::GetEnvironmentVariable('Path','User') -cne $pathBefore) { throw 'User PATH was not restored exactly' }
 if (Test-Path -LiteralPath (Join-Path $install 'Waifu Code.exe')) { throw 'Editor binary left behind' }
 Write-Output 'Uninstall passed: app, shortcuts and owned registry entries removed; original user PATH restored.'
-$receipt = @{ passed=$true; sha256=(Get-FileHash -LiteralPath $Installer -Algorithm SHA256).Hash.ToLowerInvariant(); checks=@('install','shortcuts','path','context-menus','clean-payload','cli','native-editor-and-addon-api','live-registry','uninstall','restore-path') }
+$checks = @('install','shortcuts','path','context-menus','clean-payload','cli','uninstall','restore-path')
+if (-not $SkipEditor) { $checks += @('native-editor-and-addon-api','live-registry') }
+$receipt = @{ passed=$true; sha256=(Get-FileHash -LiteralPath $Installer -Algorithm SHA256).Hash.ToLowerInvariant(); checks=$checks }
 $receipt | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $workspace 'work/waifu-installer-test-result.json') -Encoding utf8

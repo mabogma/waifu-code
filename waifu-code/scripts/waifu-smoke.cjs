@@ -25,6 +25,7 @@ async function main() {
 		const settingsFile = path.join(userData, 'User/settings.json');
 		const settings = JSON.parse(await fs.readFile(settingsFile, 'utf8'));
 		settings['waifuAddons.registryUrl'] = process.env.WAIFU_LIVE_REGISTRY_URL || '';
+		settings['waifuUpdates.enabled'] = false;
 		await fs.writeFile(settingsFile, JSON.stringify(settings));
 	}
 	await installAddon(path.join(root, 'extensions/waifu-addons/examples/uppercase'), path.join(userData, 'User/globalStorage/waifu.waifu-addons/addons'));

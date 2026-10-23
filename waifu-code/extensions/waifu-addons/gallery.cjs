@@ -6,7 +6,7 @@ const { randomBytes } = require('node:crypto');
 function getGalleryHtml(webview, extensionUri, vscode, mode = 'sidebar') {
 	const media = name => webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'media', name));
 	const nonce = randomBytes(16).toString('hex');
-	return `<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource}; style-src ${webview.cspSource}; script-src 'nonce-${nonce}'; base-uri 'none'; form-action 'none'"><link rel="stylesheet" href="${media('addons.css')}"></head><body data-mode="${mode}"><main id="app" aria-busy="true"></main><script nonce="${nonce}" src="${media('addons.js')}"></script></body></html>`;
+	return `<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource}; style-src ${webview.cspSource}; script-src 'nonce-${nonce}'; base-uri 'none'; form-action 'none'"><link rel="stylesheet" href="${media('addons.css')}"><link rel="stylesheet" href="${media('webview-backgrounds.css')}"></head><body data-mode="${mode}"><main id="app" aria-busy="true"></main><script nonce="${nonce}" src="${media('addons.js')}"></script></body></html>`;
 }
 
 function createAddonGallery(vscode, context, getState, onAction, onError) {

@@ -7,11 +7,11 @@ exports.run = async () => {
 	const addonManager = vscode.extensions.getExtension('waifu.waifu-addons');
 	assert.ok(addonManager, 'Waifu Addons is bundled');
 	const api = await addonManager.activate();
-	assert.equal(addonManager.packageJSON.version, '0.4.1');
+	assert.equal(addonManager.packageJSON.version, '0.4.2');
 	assert.equal(vscode.workspace.getConfiguration('workbench').inspect('colorTheme').defaultValue, 'Waifu Midnight');
 	assert.equal(addonManager.packageJSON.contributes.views.waifu[0].type, 'webview');
 	const commands = await vscode.commands.getCommands(true);
-	for (const command of ['waifu.addons.install', 'waifu.addons.manage', 'waifu.welcome', 'waifu.uppercase.selection']) {
+	for (const command of ['waifu.addons.install', 'waifu.addons.manage', 'waifu.welcome', 'waifu.uppercase.selection', 'waifu.updates.check']) {
 		assert.ok(commands.includes(command), `Missing ${command}`);
 	}
 	assert.ok(addonManager.packageJSON.contributes.themes.some(theme => theme.label === 'Waifu Midnight'));

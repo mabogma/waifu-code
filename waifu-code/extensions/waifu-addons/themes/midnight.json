@@ -42,7 +42,7 @@
 		"panel.background": "#191522",
 		"panel.border": "#342b43",
 		"panelTitle.activeForeground": "#f4a7c5",
-		"terminal.background": "#191522",
+		"terminal.background": "#00000000",
 		"terminal.foreground": "#e7dff2",
 		"terminal.ansiMagenta": "#d3a0e8",
 		"terminal.ansiBlue": "#a6b8ef",

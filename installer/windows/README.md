@@ -6,16 +6,16 @@
 
 ## Сборка
 
-Нужны Windows, PowerShell и [Inno Setup 7](https://jrsoftware.org/). Подготовь папку Windows-дистрибутива с Waifu Code.exe, resources/app и встроенным менеджером Waifu Addons 0.4.1. Для основы VSCodium можно использовать `waifu-code/scripts/package-waifu-portable.cjs`; происхождение конкретной сборки фиксируется в WAIFU-BUILD.json.
+Нужны Windows, PowerShell и [Inno Setup 7](https://jrsoftware.org/). Подготовь папку Windows-дистрибутива с Waifu Code.exe, resources/app и встроенным менеджером Waifu Addons 0.4.2. Для основы VSCodium можно использовать `waifu-code/scripts/package-waifu-portable.cjs`; происхождение конкретной сборки фиксируется в WAIFU-BUILD.json.
 
 ```powershell
 ./installer/windows/Build-Installer.ps1 `
   -ApplicationDirectory 'C:\build\WaifuCode-Windows-x64' `
   -CompilerPath 'C:\Program Files\Inno Setup 7\ISCC.exe' `
-  -Version 0.4.1
+  -Version 0.4.2
 ```
 
-Путь компилятора укажи свой. Результат по умолчанию: `artifacts/WaifuCodeUserSetup-x64-0.4.1.exe` и `SHA256SUMS.txt`. Можно задать `-OutputDirectory`. Исходная папка не изменяется. Чистая staging-копия остаётся в `work/installer-stage-*`; для повторной компиляции после ошибки можно передать её через `-PreparedDirectory`.
+Путь компилятора укажи свой. Результат по умолчанию: `artifacts/WaifuCodeUserSetup-x64-0.4.2.exe` и `SHA256SUMS.txt`. Можно задать `-OutputDirectory`. Исходная папка не изменяется. Чистая staging-копия остаётся в `work/installer-stage-*`; для повторной компиляции после ошибки можно передать её через `-PreparedDirectory`.
 
 В установщик не входят portable-папка data, runtime-кэш Node и тесты менеджера. Файлы лицензий и third-party notices сохраняются. Скрипт проверяет отсутствие приватных каталогов и файлов ключей издателя. Встроенный каталог не требует ключа для скачивания; ключи издателя в пакет не встраиваются.
 
@@ -24,7 +24,7 @@
 Сначала установи пакет в отдельную тестовую папку и проверь мастер, запуск, PATH, ярлыки, контекстные меню и удаление. Обновление поверх установленной версии должно сохранять настройки. Параметры для автоматической проверки:
 
 ```powershell
-./artifacts/WaifuCodeUserSetup-x64-0.4.1.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /LANG=russian /DIR="C:\test\WaifuCode" /TASKS="addtopath,filecontext,foldercontext"
+./artifacts/WaifuCodeUserSetup-x64-0.4.2.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /LANG=russian /DIR="C:\test\WaifuCode" /TASKS="addtopath,filecontext,foldercontext"
 ```
 
 Не используй для теста папку с пользовательскими файлами. Запуск настоящего редактора проверяется отдельно от успешной компиляции установщика.
@@ -32,10 +32,12 @@
 Полная автоматическая проверка на чистой тестовой Windows-машине (при уже установленном Waifu Code скрипт остановится, чтобы не заменить его):
 
 ```powershell
-./installer/windows/Test-Installer.ps1 -Installer './artifacts/WaifuCodeUserSetup-x64-0.4.1.exe' -NodeExecutable node
+./installer/windows/Test-Installer.ps1 -Installer './artifacts/WaifuCodeUserSetup-x64-0.4.2.exe' -NodeExecutable node
 ```
 
 Тест устанавливает приложение в отдельную папку work, проверяет ярлыки, PATH и реестр, запускает CLI и интеграционную проверку редактора, затем удаляет тестовую установку и проверяет восстановление PATH. Нужен Node.js 24. Для проверки без подключения живого каталога передай `-RegistryUrl ''`.
+
+Чтобы проверить тихую установку, CLI и удаление без открытия окна редактора, добавь `-SkipEditor`. Этот режим не выполняет нативный тест интерфейса и живого каталога; в отчёте отмечаются только выполненные проверки.
 
 ## Подпись и релиз
 
