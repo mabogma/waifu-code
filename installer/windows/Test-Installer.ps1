@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$Installer, [string]$NodeExecutable = 'node', [string]$RegistryUrl = 'http://132.243.115.51:4853', [string]$Version = '0.4.2', [switch]$SkipEditor)
+param([Parameter(Mandatory=$true)][string]$Installer, [string]$NodeExecutable = 'node', [string]$RegistryUrl = 'http://132.243.115.51:4853', [string]$Version = '0.4.3', [switch]$SkipEditor)
 $ErrorActionPreference = 'Stop'
 $workspace = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 New-Item -ItemType Directory -Path (Join-Path $workspace 'work') -Force | Out-Null

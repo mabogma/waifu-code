@@ -1,7 +1,7 @@
 param(
 	[Parameter(Mandatory=$true)][string]$ApplicationDirectory,
 	[string]$CompilerPath = 'C:\Program Files (x86)\Inno Setup 7\ISCC.exe',
-	[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '0.4.2',
+	[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '0.4.3',
 	[string]$OutputDirectory,
 	[string]$PreparedDirectory
 )

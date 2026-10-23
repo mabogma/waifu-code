@@ -3,7 +3,7 @@
 	"displayName": "%displayName%",
 	"description": "%description%",
 	"publisher": "waifu",
-	"version": "0.4.2",
+	"version": "0.4.3",
 	"license": "MIT",
 	"engines": {
 		"vscode": "^1.100.0"
