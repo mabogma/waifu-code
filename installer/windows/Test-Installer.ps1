@@ -7,17 +7,21 @@ $uninstallKey = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\{9E43
 $keys = @($uninstallKey,'HKCU:\Software\Classes\*\shell\WaifuCode','HKCU:\Software\Classes\Directory\shell\WaifuCode','HKCU:\Software\Classes\Directory\Background\shell\WaifuCode','HKCU:\Software\Classes\waifu-code','HKCU:\Software\WaifuCode\Installer')
 foreach ($key in $keys) { if (Test-Path -LiteralPath $key) { throw "Existing Waifu installation state found; refusing to replace it for a test: $key" } }
 $desktop = Join-Path ([Environment]::GetFolderPath('DesktopDirectory')) 'Waifu Code.lnk'
-$menu = Join-Path ([Environment]::GetFolderPath('Programs')) 'Waifu Code Installer Test'
-if ((Test-Path -LiteralPath $desktop) -or (Test-Path -LiteralPath $menu)) { throw 'Existing Waifu test shortcuts found' }
+$group = 'Waifu Code Installer Test ' + [guid]::NewGuid().ToString('N')
+$menu = Join-Path ([Environment]::GetFolderPath('Programs')) $group
+$testDesktop = -not (Test-Path -LiteralPath $desktop)
+if (Test-Path -LiteralPath $menu) { throw 'Existing Waifu test menu found' }
 $pathBefore = [Environment]::GetEnvironmentVariable('Path','User')
-$arguments = @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/NOCLOSEAPPLICATIONS','/LANG=russian','/GROUP="Waifu Code Installer Test"','/TASKS="desktopicon,addtopath,filecontext,foldercontext"',('/DIR="'+$install+'"'),('/LOG="'+(Join-Path $workspace 'work/waifu-install.log')+'"'))
+$tasks = 'addtopath,filecontext,foldercontext'
+if ($testDesktop) { $tasks = 'desktopicon,' + $tasks }
+$arguments = @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/NOCLOSEAPPLICATIONS','/LANG=russian',('/GROUP="'+$group+'"'),('/TASKS="'+$tasks+'"'),('/DIR="'+$install+'"'),('/LOG="'+(Join-Path $workspace 'work/waifu-install.log')+'"'))
 $process = Start-Process -FilePath (Resolve-Path -LiteralPath $Installer).Path -ArgumentList $arguments -WindowStyle Hidden -PassThru -Wait
 if ($process.ExitCode -ne 0) { throw "Installer failed: $($process.ExitCode). See work/waifu-install.log" }
 $installed = Get-ItemProperty -LiteralPath $uninstallKey
 if ($installed.DisplayName -ne 'Waifu Code' -or $installed.DisplayVersion -ne $Version) { throw 'Incorrect uninstall metadata' }
 if (-not (Test-Path -LiteralPath (Join-Path $install 'Waifu Code.exe'))) { throw 'Installed editor missing' }
 if (Test-Path -LiteralPath (Join-Path $install 'data')) { throw 'Portable data leaked into installation' }
-if (-not (Test-Path -LiteralPath $desktop)) { throw 'Desktop shortcut missing' }
+if ($testDesktop -and -not (Test-Path -LiteralPath $desktop)) { throw 'Desktop shortcut missing' }
 if (-not (Test-Path -LiteralPath (Join-Path $menu 'Waifu Code.lnk'))) { throw 'Start Menu shortcut missing' }
 $pathAfter = [Environment]::GetEnvironmentVariable('Path','User')
 if ($pathAfter -notlike ('*'+(Join-Path $install 'bin')+'*')) { throw 'PATH entry missing' }
@@ -51,7 +55,7 @@ $uninstaller = Join-Path $install 'unins000.exe'
 $process = Start-Process -FilePath $uninstaller -ArgumentList @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART',('/LOG="'+(Join-Path $workspace 'work/waifu-uninstall.log')+'"')) -WindowStyle Hidden -Wait -PassThru
 if ($process.ExitCode -ne 0) { throw "Uninstaller failed: $($process.ExitCode)" }
 foreach ($key in $keys) { if (Test-Path -LiteralPath $key) { throw "Registry entry left behind: $key" } }
-if ((Test-Path -LiteralPath $desktop) -or (Test-Path -LiteralPath (Join-Path $menu 'Waifu Code.lnk'))) { throw 'Shortcuts left behind' }
+if (($testDesktop -and (Test-Path -LiteralPath $desktop)) -or (Test-Path -LiteralPath (Join-Path $menu 'Waifu Code.lnk'))) { throw 'Shortcuts left behind' }
 if ([Environment]::GetEnvironmentVariable('Path','User') -cne $pathBefore) { throw 'User PATH was not restored exactly' }
 if (Test-Path -LiteralPath (Join-Path $install 'Waifu Code.exe')) { throw 'Editor binary left behind' }
 Write-Output 'Uninstall passed: app, shortcuts and owned registry entries removed; original user PATH restored.'
